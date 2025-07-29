@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phishing Awareness Education</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a3a5f, #2c5282);
+            color: #f0f9ff;
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 20px 0;
+            margin-bottom: 20px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            color: #90caf9;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            color: #bbdefb;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .warning-banner {
+            background: linear-gradient(135deg, #e53935, #c62828);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 20px 0;
+            border: 2px solid #ff8a65;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .warning-banner h2 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .panel {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .panel h2 {
+            color: #81d4fa;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(129, 212, 250, 0.3);
+        }
+        
+        .list-item {
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        
+        .list-item:before {
+            content: "⚠️";
+            font-size: 1.2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: #2196f3;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            margin: 15px 5px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            box-shadow: 0 4px 8px rgba(33, 150, 243, 0.3);
+        }
+        
+        .btn:hover {
+            background: #1e88e5;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(33, 150, 243, 0.4);
+        }
+        
+        .btn-warning {
+            background: #ff9800;
+            box-shadow: 0 4px 8px rgba(255, 152, 0, 0.3);
+        }
+        
+        .btn-warning:hover {
+            background: #fb8c00;
+            box-shadow: 0 6px 12px rgba(255, 152, 0, 0.4);
+        }
+        
+        .simulation-form {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 25px 0;
+        }
+        
+        .form-group {
+            margin-bottom: 18px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #e3f2fd;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.2);
+            color: white;
+            font-size: 1rem;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #2196f3;
+        }
+        
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .results-table th, .results-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .results-table th {
+            background: rgba(229, 57, 53, 0.3);
+            color: #ffab91;
+        }
+        
+        .highlight {
+            color: #ffcc80;
+            font-weight: bold;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+        
+        .page {
+            display: none;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Main Education Page -->
+        <div id="education-page" class="page active">
+            <header>
+                <h1>Phishing Awareness Education</h1>
+                <p class="subtitle">Learn how phishing attacks work and how to protect yourself</p>
+            </header>
+
+            <div class="warning-banner">
+                <h2>⚠️ Educational Tool Only</h2>
+                <p>This is a demonstration for cybersecurity education. No data is collected or stored.</p>
+            </div>
+
+            <div class="panel">
+                <h2>Common Phishing Techniques</h2>
+                <div class="list-item">Urgent action requests (e.g., 'Your account will be suspended')</div>
+                <div class="list-item">Too-good-to-be-true offers</div>
+                <div class="list-item">Suspicious sender addresses</div>
+                <div class="list-item">Requests for sensitive information</div>
+                <div class="list-item">Mismatched URLs (hover before clicking)</div>
+                <div class="list-item">Poor grammar and spelling</div>
+            </div>
+            
+            <div class="panel">
+                <h2>Protection Strategies</h2>
+                <div class="list-item">Verify requests through official channels</div>
+                <div class="list-item">Enable multi-factor authentication</div>
+                <div class="list-item">Keep software updated</div>
+                <div class="list-item">Check for HTTPS and padlock icon</div>
+                <div class="list-item">Use password managers</div>
+                <div class="list-item">Report suspicious emails to security teams</div>
+            </div>
+            
+            <div class="panel">
+                <h2>Phishing Statistics</h2>
+                <div class="list-item">91% of cyber attacks start with phishing emails</div>
+                <div class="list-item">Phishing attacks increased by 65% in the past year</div>
+                <div class="list-item">Average cost of a phishing attack: $4.65 million</div>
+            </div>
+            
+            <div class="text-center">
+                <button class="btn btn-warning" onclick="showPage('simulation-page')">View Phishing Simulation</button>
+            </div>
+        </div>
+        
+        <!-- Simulation Page -->
+        <div id="simulation-page" class="page">
+            <header>
+                <h1>Account Security Alert</h1>
+                <p class="subtitle">Urgent: Your account requires immediate verification</p>
+            </header>
+
+            <div class="warning-banner" style="background: linear-gradient(135deg, #43a047, #2e7d32);">
+                <h2>⚠️ Security Notice</h2>
+                <p>We've detected unusual activity on your account. Verify your identity to prevent suspension.</p>
+            </div>
+
+            <div class="simulation-form">
+                <div class="form-group">
+                    <label for="username">Username or Email</label>
+                    <input type="text" id="username" placeholder="Enter your username or email">
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Enter your password">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Recovery Email</label>
+                    <input type="email" id="email" placeholder="Enter your recovery email">
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" placeholder="For 2-factor authentication">
+                </div>
+                
+                <div class="text-center">
+                    <button class="btn" onclick="showPage('results-page'); captureData()">Verify Account</button>
+                </div>
+            </div>
+
+            <div class="warning-banner">
+                <h2>This is a Simulation</h2>
+                <p>This page demonstrates what a phishing attack looks like. In a real attack:</p>
+                <div class="list-item">The URL would be suspicious (check the address bar)</div>
+                <div class="list-item">There would be urgency or threats</div>
+                <div class="list-item">Requests for sensitive information</div>
+                <div class="text-center" style="margin-top: 15px;">
+                    <button class="btn" onclick="showPage('education-page')">Back to Safety</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Results Page -->
+        <div id="results-page" class="page">
+            <header>
+                <h1>Phishing Demonstration Results</h1>
+                <p class="subtitle">This is what attackers could have captured in a real phishing attack</p>
+            </header>
+
+            <div class="warning-banner">
+                <h2>⚠️ Educational Demonstration Only</h2>
+                <p>No actual data was collected or stored. This is for awareness purposes.</p>
+            </div>
+
+            <div class="panel">
+                <h2>Captured Information</h2>
+                <p>In a real phishing attack, this is the information that would have been stolen:</p>
+                
+                <table class="results-table">
+                    <tr>
+                        <th>Field</th>
+                        <th>Value Entered</th>
+                    </tr>
+                    <tr>
+                        <td>Username/Email</td>
+                        <td id="display-username">-</td>
+                    </tr>
+                    <tr>
+                        <td>Password</td>
+                        <td class="highlight" id="display-password">••••••••</td>
+                    </tr>
+                    <tr>
+                        <td>Recovery Email</td>
+                        <td id="display-email">-</td>
+                    </tr>
+                    <tr>
+                        <td>Phone Number</td>
+                        <td id="display-phone">-</td>
+                    </tr>
+                </table>
+                
+                <p>With this information, attackers could:</p>
+                <div class="list-item">Access your accounts</div>
+                <div class="list-item">Reset your passwords</div>
+                <div class="list-item">Attempt identity theft</div>
+                <div class="list-item">Target you with more sophisticated attacks</div>
+            </div>
+
+            <div class="panel">
+                <h2>How to Identify Phishing</h2>
+                <div class="list-item">Urgent action requests</div>
+                <div class="list-item">Suspicious sender addresses</div>
+                <div class="list-item">Requests for sensitive information</div>
+                <div class="list-item">Mismatched URLs</div>
+                <div class="list-item">Poor grammar and spelling</div>
+            </div>
+            
+            <div class="panel">
+                <h2>What to Do If You Fall Victim</h2>
+                <div class="list-item">Immediately change your passwords</div>
+                <div class="list-item">Enable multi-factor authentication</div>
+                <div class="list-item">Contact your financial institutions</div>
+                <div class="list-item">Monitor accounts for suspicious activity</div>
+            </div>
+            
+            <div class="text-center">
+                <button class="btn" onclick="showPage('education-page')">Back to Safety</button>
+                <button class="btn btn-warning" onclick="showPage('simulation-page')">View Simulation Again</button>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Educational Tool | No real data is collected | For awareness purposes only</p>
+            <p>Always verify requests through official channels before providing any information</p>
+        </footer>
+    </div>
+
+    <script>
+        // Function to show a specific page and hide others
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show the requested page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+        
+        // Function to capture form data for demonstration
+        function captureData() {
+            // Get form values
+            const username = document.getElementById('username').value || '-';
+            const password = document.getElementById('password').value ? '••••••••' : '-';
+            const email = document.getElementById('email').value || '-';
+            const phone = document.getElementById('phone').value || '-';
+            
+            // Display the captured data
+            document.getElementById('display-username').textContent = username;
+            document.getElementById('display-password').textContent = password;
+            document.getElementById('display-email').textContent = email;
+            document.getElementById('display-phone').textContent = phone;
+            
+            // Clear the form for next time
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('phone').value = '';
+        }
+    </script>
+</body>
+</html>
